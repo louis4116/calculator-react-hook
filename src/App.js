@@ -9,7 +9,7 @@ function App() {
     if (curNumber.includes(".") && e.target.value === ".") {
       return;
     }
-
+   
     setCurNumber(curNumber.concat(e.target.value));
   };
   const allClear = () => {
@@ -21,40 +21,40 @@ function App() {
     setCurNumber(curNumber.slice(0, -1));
   };
   const operate = (e) => {
-    setSymbol(e.target.value);
-    if (curNumber === "") {
-      return;
+    if(prevNumber!==""){
+      setSymbol(e.target.value);
+    }else{
+      setSymbol(e.target.value);
+      setPrevNumber(curNumber)
+    setCurNumber("")
     }
-    if (prevNumber !== "") {
-      calculate();
-    } else {
-      setCurNumber("");
-      setPrevNumber(curNumber);
-    }
+      
   };
   const calculate = () => {
     const prev = parseFloat(prevNumber);
     const cur = parseFloat(curNumber);
-    console.log(symbol)
+    
     if (isNaN(prev) || isNaN(cur)) {
+      
       return;
     }
     let result;
+    
     switch (symbol) {
       case "+":
-        result = prev + cur;
+        result = (prev + cur).toFixed(2);
         break;
       case "-":
-        result = prev - cur;
+        result = (prev - cur).toFixed(2);
         break;
       case "*":
-        result = prev * cur;
+        result = (prev * cur).toFixed(2);
         break;
       case "÷":
-        result = prev / cur;
+        result = (prev / cur).toFixed(2);
         break;
     }
-    
+  
     setPrevNumber(result.toString());
     setCurNumber("");
   };
